@@ -257,12 +257,17 @@ public class BinarySearchTree2<E> implements BinaryTreeInfo {
 			 * 指向的节点,现在变成了变量node指向的节点
 			 */
 			node = successor;  						
-		}
-		
-		Node<E>  replacement = node.left!=null?node.left:node.right;   //很重要减少代码判断量
-		// 经过上面的判断,删除度为2的节点统一成了删除度为0或者1的节点node
-		if(isLeaf(node)) {  //当需要删除的节点为叶子节点(度为0)
-			 if(node.parent == null) { //该叶子节点为根节点情况
+		}	
+		Node<E>  replacement = node.left!=null?node.left:node.right;   //很重要,减少代码判断量
+		if(replacement != null) {   //表明node节点度为1,且replacement为node节点的子节点
+			if(node.parent == null) {
+				root = replacement;
+				replacement.parent = null;
+			} else {
+				
+			}
+		} else {  //表明node节点度为0,为叶子节点
+			if(node.parent == null) { //该叶子节点为根节点情况
 				 root = null;   
 			 } else { //普通叶子节点情况
 				 if(node.parent.left == node) {
@@ -271,32 +276,44 @@ public class BinarySearchTree2<E> implements BinaryTreeInfo {
 					 node.parent.right = null;
 				 } 
 			 }
-		} else { //当需要删除的节点度为1
-			if(node.parent == null) { //当该节点为根节点时
-				if(node.left != null) {
-					root = node.left;
-					node.left.parent = null;
-				} else {
-					root = node.right;
-					node.right.parent = null;
-				}
-				
-			} else {      //当该节点为普通节点
-				if(node.parent.left ==node && node.left!=null ) {
-					node.parent.left = node.left;
-					node.left.parent = node.parent;
-				} else if(node.parent.right == node && node.left!= null) {
-					node.parent.right = node.left;
-					node.left.parent = node.parent;
-				} else if(node.parent.left == node && node.right != null) {
-					node.parent.left = node.right;
-					node.right.parent = node.parent;
-				} else {
-					node.parent.right = node.right;
-					node.right.parent = node.parent;
-				}
-			}
-		}	
+		}
+		// 经过上面的判断,删除度为2的节点统一成了删除度为0或者1的节点node
+//		if(isLeaf(node)) {  //当需要删除的节点为叶子节点(度为0)
+//			 if(node.parent == null) { //该叶子节点为根节点情况
+//				 root = null;   
+//			 } else { //普通叶子节点情况
+//				 if(node.parent.left == node) {
+//					 node.parent.left = null;
+//				 } else {
+//					 node.parent.right = null;
+//				 } 
+//			 }
+//		} else { //当需要删除的节点度为1
+//			if(node.parent == null) { //当该节点为根节点时
+//				if(node.left != null) {
+//					root = node.left;
+//					node.left.parent = null;
+//				} else {
+//					root = node.right;
+//					node.right.parent = null;
+//				}
+//				
+//			} else { //当该节点为普通节点
+//				if(node.parent.left ==node && node.left!=null ) {
+//					node.parent.left = node.left;
+//					node.left.parent = node.parent;
+//				} else if(node.parent.right == node && node.left!= null) {
+//					node.parent.right = node.left;
+//					node.left.parent = node.parent;
+//				} else if(node.parent.left == node && node.right != null) {
+//					node.parent.left = node.right;
+//					node.right.parent = node.parent;
+//				} else {
+//					node.parent.right = node.right;
+//					node.right.parent = node.parent;
+//				}
+//			}
+//		}	
 	}
 	
 	/**
