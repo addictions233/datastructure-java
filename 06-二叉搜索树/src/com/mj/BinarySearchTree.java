@@ -315,16 +315,109 @@ public class BinarySearchTree<E> implements BinaryTreeInfo { // 实现BinaryTree
 		}
 		return node.parent;
 	}
-	
 	/**
-	 * 	向二叉搜索树中删除元素
+	 *  获取一个节点的后继节点
+	 *  		后继节点定义: 一个节点中序遍历时它的后面的一个节点
 	 */
-	public boolean remove(E element) {
-		return false;
+	private Node<E> successor(Node<E> node){
+		if(node == null) return null;
+		if(node.right!= null) {
+			node = node.right;
+			while(node.left!=null) {
+				node = node.left;
+			}
+			return node;
+		} else {
+			while(node.parent!=null && node==node.parent.right) {
+				node = node.parent;
+			}
+			return node.parent;
+		}
 	}
 	
 	/**
-	 *  二叉树是不允许存储null元素的,所以元素必须进行非空校验
+	 * 	将二叉搜索树中指定元素删除
+	 */
+	public void remove(E element) {
+		remove(node(element));
+	}
+	/**
+	 *  获取存储指定元素的节点
+	 */
+	private Node<E> node(E element){
+		if(element == null) return null;
+		Node<E> node = root;
+		while(node != null) {
+			int comp = compare(element, node.element);
+			if(comp == 0) {
+				return node;
+			} else if(comp > 0) {
+				node = node.right;
+			} else {
+				node = node.left;
+			}
+		} 
+		return null;
+	}
+	/**
+	 * 删除二叉搜索树中指定节点node
+	 */
+	private void remove(Node<E> node) {
+		if(node == null) return;
+		size--;
+		if(hasTwoChildern(node)) {  // 需要删除的节点度为2
+			/*
+			 * 度为2的节点一定有前驱或者后继节点
+			 * 且前驱和后者后继节点的度一定为0或者1
+			 * 因为度为2的节点的后继或者前驱节点一定在自己的子树中
+			 */
+			Node<E> successor = successor(node);
+			node.element = successor.element;  //将其后继节点的元素值覆盖在该节点的元素值
+			node = successor;  //然后将其后继节点删除
+		}
+		/*
+		 * 统一成了删除一个度为0或者1的node节点
+		 */
+		Node<E> replacement = node.left!=null?node.left:node.right;
+		if(replacement == null) { //要删除的节点度为0
+			if(node.parent == null) {  //要删除的节点为根节点root 
+				root = null;
+			}else {  //普通度为0的节点
+				if(node.parent.left == node) {
+					node.parent.left = null;
+				} else {
+					node.parent.right = null;
+				}
+			}
+		}else {   //要删除的节点度为1,且其子节点为 replacement
+			if(node.parent == null) {  //要删除的节点为根节点
+				root = replacement;
+				replacement.parent = null;
+			} else {  //普通度为1的节点
+				if(node.parent.left == node) {
+					node.parent.left = replacement;
+					replacement.parent = node.parent;
+				} else {
+					node.parent.right = replacement;
+					replacement.parent = node.parent;
+				}
+			}
+		}	
+	}
+	/**
+	 *  判断一个节点是否度为2的节点,如果是返回true
+	 */
+	private boolean hasTwoChildern(Node<E> node) {
+		boolean flag = false;
+		if(node == null) return flag;
+		if(node.left!=null && node.right!=null) {
+			flag = true;
+		}
+		return flag;
+	}
+	
+	/**
+	 *  二叉树是不允许存储null元素的,所以添加元素必须进行非空校验
 	 * 	定义 elementNotNullCheck()方法进行非空校验
 	 *  @param element
 	 */

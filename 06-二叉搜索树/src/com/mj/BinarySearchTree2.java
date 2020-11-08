@@ -208,12 +208,12 @@ public class BinarySearchTree2<E> implements BinaryTreeInfo {
 
 	
 	/**
-	  *  删除二叉搜索树中的元素
+	 *  删除二叉搜索树中的指定元素
 	 */
 	public void remove(E element) {
 		/*
 		 * 删除二叉搜索树中的元素就得删除存储该元素的节点
-		 * 第一步先找到存储该元素的节点
+		 * 第一步先找到存储该元素的节点,再将该节点删除
 		 */
 		remove(	getNode(element));
 	}
@@ -222,7 +222,6 @@ public class BinarySearchTree2<E> implements BinaryTreeInfo {
 	 * 根据给定的元素值element,获取存储该元素的节点node
 	 */
 	private Node<E> getNode(E element){
-//		elementNotNull(element);
 		if(element == null) return null;
 		Node<E> node = root;
 		int result;
@@ -264,6 +263,13 @@ public class BinarySearchTree2<E> implements BinaryTreeInfo {
 				root = replacement;
 				replacement.parent = null;
 			} else {
+				 if(node.parent.left == node) {
+					 node.parent.left = replacement;
+					 replacement.parent = node.parent;
+				 } else {
+					 node.parent.right = replacement;
+					 replacement.parent = node.parent;
+				 }
 				
 			}
 		} else {  //表明node节点度为0,为叶子节点
@@ -277,43 +283,7 @@ public class BinarySearchTree2<E> implements BinaryTreeInfo {
 				 } 
 			 }
 		}
-		// 经过上面的判断,删除度为2的节点统一成了删除度为0或者1的节点node
-//		if(isLeaf(node)) {  //当需要删除的节点为叶子节点(度为0)
-//			 if(node.parent == null) { //该叶子节点为根节点情况
-//				 root = null;   
-//			 } else { //普通叶子节点情况
-//				 if(node.parent.left == node) {
-//					 node.parent.left = null;
-//				 } else {
-//					 node.parent.right = null;
-//				 } 
-//			 }
-//		} else { //当需要删除的节点度为1
-//			if(node.parent == null) { //当该节点为根节点时
-//				if(node.left != null) {
-//					root = node.left;
-//					node.left.parent = null;
-//				} else {
-//					root = node.right;
-//					node.right.parent = null;
-//				}
-//				
-//			} else { //当该节点为普通节点
-//				if(node.parent.left ==node && node.left!=null ) {
-//					node.parent.left = node.left;
-//					node.left.parent = node.parent;
-//				} else if(node.parent.right == node && node.left!= null) {
-//					node.parent.right = node.left;
-//					node.left.parent = node.parent;
-//				} else if(node.parent.left == node && node.right != null) {
-//					node.parent.left = node.right;
-//					node.right.parent = node.parent;
-//				} else {
-//					node.parent.right = node.right;
-//					node.right.parent = node.parent;
-//				}
-//			}
-//		}	
+	
 	}
 	
 	/**
@@ -327,18 +297,6 @@ public class BinarySearchTree2<E> implements BinaryTreeInfo {
 		} 
 		return flag;
 	}
-	/**
-	 * 判断一个节点是否是叶子节点
-	 */
-	private boolean isLeaf(Node<E> node) {
-		boolean flag = false;
-		if(node == null) return flag;
-		if(node.left == null && node.right == null) {
-			flag = true;
-		}
-		return flag;
-	}
-	
 	
 	/**
 	 * 	判断二叉搜索树中是否包含该元素
