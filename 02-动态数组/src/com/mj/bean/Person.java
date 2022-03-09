@@ -3,7 +3,7 @@ package com.mj.bean;
 import java.util.Objects;
 
 /**
- * 	存储的元素工具类
+ * 	存储的元素类
  * @author one
  *
  */

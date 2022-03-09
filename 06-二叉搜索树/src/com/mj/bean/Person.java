@@ -1,6 +1,9 @@
 package com.mj.bean;
 
-
+/**
+ * @author one
+ * 实体类
+ */
 public class Person implements Comparable<Person>{
 	private String name;
 	private int age;

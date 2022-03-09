@@ -1,7 +1,6 @@
-package com.mj.queuebystack;
+package com.mj.stack;
 
-import com.mj.linkedlist.ArrayList;
-import com.mj.linkedlist.List;
+import com.mj.list.*;
 
 /**
  * 	定义一个数据结构 栈stack
@@ -11,7 +10,8 @@ import com.mj.linkedlist.List;
  */
 public class Stack<E> /*extends ArrayList<E>*/{   //声明为泛型,可以存储多种数据类型
 	/**
-	 *  注意:直接用 Stack 继承 ArrayList有问题,就是 ArrayList的成员方法和成员变量,Stack类的对象都能够使用,这样就违背了Stack数据结构的特性
+	 *  注意:直接用 Stack 继承 ArrayList有问题,就是 ArrayList的成员方法和成员变量,Stack类的对象都能够使用,
+	 *  这样就违背了Stack数据结构的特性
 	 *  所以不能用直接继承来ArrayList来实现 栈stack , 而是创建一个私有的List成员变量
 	 */
 	private List<E> list = new ArrayList<E>();

@@ -1,5 +1,8 @@
 package com.mj.printer;
 
+/**
+ * @author mj
+ */
 public abstract class Printer {	
 	/**
 	 * 二叉树的基本信息

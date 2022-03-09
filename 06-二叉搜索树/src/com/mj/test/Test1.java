@@ -1,8 +1,6 @@
 package com.mj.test;
 
-import java.util.Queue;
-
-import com.mj.BinarySearchTree;
+import com.mj.tree.BinarySearchTree;
 import com.mj.printer.BinaryTrees;
 
 
