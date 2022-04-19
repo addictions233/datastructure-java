@@ -1,9 +1,9 @@
 package com.mj.tree;
 
+import com.mj.printer.BinaryTreeInfo;
+
 import java.util.Comparator;
 import java.util.LinkedList;
-import java.util.Queue;
-import com.mj.printer.BinaryTreeInfo;
 
 /**
  * @author one
@@ -174,7 +174,7 @@ public class BinarySearchTree2<E> implements BinaryTreeInfo {
 	 * 		前驱节点定义: 中序遍历时(二叉搜索树元素从小到大排列),一个节点的前一个节点
 	 */
 	private Node<E> predecessor(Node<E> node){
-		if(node==null) return null;
+		if(node==null) { return null; }
 		if(node.left != null) {
 			node = node.left;  
 			while(node.right != null) {  //在左子树中找最大值
@@ -331,7 +331,6 @@ public class BinarySearchTree2<E> implements BinaryTreeInfo {
 	public Object right(Object node) {
 		return ((Node)node).right;
 	}
-	@SuppressWarnings("unchecked")
 	@Override
 	public Object string(Object node) {
 		Node<E> node2 = (Node<E>)node;

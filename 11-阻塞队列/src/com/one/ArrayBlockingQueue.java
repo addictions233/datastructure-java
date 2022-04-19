@@ -18,7 +18,7 @@ public class ArrayBlockingQueue<E> {
     /**
      * 用动态数组来实现阻塞队列
      */
-    private ArrayList<E> list = new ArrayList<>(limit);
+    private ArrayList<E> list;
 
     /**
      * ReentrantLock锁对象
@@ -32,6 +32,7 @@ public class ArrayBlockingQueue<E> {
      */
     public ArrayBlockingQueue(int limit) {
         this.limit = limit;
+        this.list = new ArrayList<>(limit);
     }
 
     /**

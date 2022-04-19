@@ -2,11 +2,11 @@ package com.mj.arraylist;
 /**
  * 	泛型动态数组的实现,在动态数组中存储引用数据类型元素
  */
-import java.util.Arrays;
-
 import com.mj.list.List;
 
-@SuppressWarnings("unchecked")
+import java.util.Arrays;
+
+
 public class ArrayList<E> implements List<E> {
 	/**
 	 * 	定义成员变量size ,用来表示数组集合中存储的元素个数

@@ -1,11 +1,8 @@
 package com.mj.test;
 
 import com.mj.bean.Animal;
-import com.mj.bean.Comparator;
 import com.mj.printer.BinaryTrees;
 import com.mj.tree.BinarySearchTree3;
-
-import javax.sound.midi.Soundbank;
 
 /**
  * @ClassName: Main3
@@ -16,8 +13,6 @@ import javax.sound.midi.Soundbank;
 public class Main3 {
     public static void main(String[] args) {
         Animal animal=  new Animal("小狗",4);
-        System.out.println(animal.compareTo(new Animal("小鸡",2)));
-
         BinarySearchTree3<Animal> binarySearchTree3 = new BinarySearchTree3<>();
         binarySearchTree3.add(animal);
 
@@ -29,9 +24,9 @@ public class Main3 {
             searchTree.add(i);
         }
         BinaryTrees.println(searchTree);
-        // 二叉树前序遍历的结果打印
-        searchTree.preorderTraversal(System.out::println);
+//        searchTree.preOrderTraversal();
 //        searchTree.inorderTraversal();
-        searchTree.levelOrderTraversal(i -> System.out.println(i + 10));
+//        searchTree.postOrderTraversal();
+        searchTree.levelOrderTraversal();
     }
 }

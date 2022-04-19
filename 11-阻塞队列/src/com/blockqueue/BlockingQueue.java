@@ -1,4 +1,4 @@
-package com.one;
+package com.blockqueue;
 
 import java.util.LinkedList;
 import java.util.List;
