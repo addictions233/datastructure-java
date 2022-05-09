@@ -5,11 +5,13 @@ import java.util.List;
 
 /**
  * @ClassName: ListSet
- * @Description: 使用链表实现set集合
+ * @Description: Set集合:对元素进行去重,使用链表实现set集合
  * @Author: one
  * @Date: 2022/05/10
  */
 public class ListSet<E> implements Set<E> {
+    private final int ELEMENT_NOT_FUND = -1;
+
     List<E> list = new LinkedList<E>();
 
     /**
@@ -52,13 +54,18 @@ public class ListSet<E> implements Set<E> {
     }
 
     /**
-     * 添加元素
+     * 添加元素: set集合的元素不能重复
      *
      * @param element 元素
      */
     @Override
     public void add(E element) {
-
+        int index = list.indexOf(element);
+        if(index == ELEMENT_NOT_FUND) {
+            list.add(element);
+        } else {
+            list.set(index, element);
+        }
     }
 
     /**
@@ -68,7 +75,7 @@ public class ListSet<E> implements Set<E> {
      */
     @Override
     public void remove(E element) {
-
+        list.remove(element);
     }
 
     /**
@@ -78,6 +85,13 @@ public class ListSet<E> implements Set<E> {
      */
     @Override
     public void traversal(Visitor<E> visitor) {
-
+        if (visitor == null) {
+            return;
+        }
+        // 遍历list集合
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
+            visitor.visit(list.get(i));
+        }
     }
 }
