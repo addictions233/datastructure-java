@@ -7,35 +7,40 @@ import com.mj.printer.BinaryTreeInfo;
 import java.util.LinkedList;
 import java.util.Queue;
 
+
 /**
  * @ClassName: BinarySearchTree3
- * @Description: 第三次写二叉搜索树
+ * @Description: 实现二叉树搜索树
  * @Author: one
- * @Date: 2021/06/17
+ * @Date: 2022/03/15
  */
 public class BinarySearchTree3<E> implements BinaryTreeInfo {
+    /**
+     * 比较器: 二叉搜索树的存储元素必须是可比较的
+     * 1, 第一种传入自定义的比较器comparator
+     * 2, 让元素实现comparable接口
+     */
+    private Comparator<E> comparator;
 
+    public BinarySearchTree3(Comparator<E> comparator) {
+        this.comparator = comparator;
+    }
+
+    public BinarySearchTree3() {
+        this(null);
+    }
 
     /**
-     * 内部类: Node
-     * 二叉搜索树内部用Node节点存储元素,和链表类似
-     * 如果内部类不使用外部类的非静态成员,就将该内部类设置为静态的
-     * 静态内部类的优点是方便使用, 非静态内部类的优点是可以使用外部类的非静态成员
+     * 节点对象,用来封装元素以及节点关系,静态内部类也是顶级类
      *
-     * @param <E>
+     * @param <E> 元素泛型
      */
     private static class Node<E> {
-        private E element;
-        private Node<E> parent;
-        private Node<E> left;
-        private Node<E> right;
+        E element;
+        Node<E> parent;
+        Node<E> left;
+        Node<E> right;
 
-        /**
-         * 构造函数,新添加一个节点只需要指定存储元素,并指定父节点
-         *
-         * @param element 节点存储的元素
-         * @param parent  父节点
-         */
         public Node(E element, Node<E> parent) {
             this.element = element;
             this.parent = parent;
@@ -43,368 +48,284 @@ public class BinarySearchTree3<E> implements BinaryTreeInfo {
     }
 
     /**
-     * 由于二叉搜索树中传入的元素必须具有可比较性,为了更灵活的比较元素,可以让元素类型不实现Comparable接口,
-     * 但是在构造二叉搜索树对象时必须传入一个比较器Comparator对象
-     */
-    private Comparator<E> comparator;
-
-    /**
-     * 存储的节点个数
-     */
-    private int size;
-
-    /**
      * 二叉搜索树的根节点
      */
     private Node<E> root;
 
     /**
-     * 空参构造
+     * 存储元素个数
      */
-    public  BinarySearchTree3() {
-        super();
-    }
+    private int size;
 
     /**
-     * 有参构造: 传入比较器对象, 这样二叉搜索树可以对存储的元素类型设置灵活的比较方式
-     * @param comparator 比较器对象
+     * 二叉树存储元素个数
+     *
+     * @return
      */
-    public BinarySearchTree3(Comparator<E> comparator) {
-        this.comparator = comparator;
-    }
-
-
-    private int size() {
+    public int size() {
         return this.size;
     }
 
-    private boolean isEmpty() {
-        return size == 0;
-    }
-
-    private void clear() {
-
+    /**
+     * 是否为空
+     *
+     * @return
+     */
+    public boolean isEmpty() {
+        return this.size == 0;
     }
 
     /**
-     * 向二叉搜索树中添加元素
+     * 清空二叉树
+     */
+    public void clear() {
+        this.root = null;
+        this.size = 0;
+    }
+
+    /**
+     * 添加元素
      *
      * @param element 元素
      */
     public void add(E element) {
-        // 二叉搜索树中存储的元素都是可以比较的,所以不能为null
-        notNullCheck(element);
-        // 如果根节点为空的情况
-        if (null == root) {
-            root = new Node<>(element,null);
-            size++;
+        // 非空校验
+        checkNotNull(element);
+        if (root == null) { // 添加根元素
+            root = new Node<>(element, null);
+            this.size++;
             return;
         }
-        //使用迭代的方式查找新加入的元素存储的节点位置
-        // 要保存的元素和它要比较的节点,最开始肯定是root根节点比较
+        int compareResult = 0;
+        // 要比较的节点
         Node<E> node = root;
-        // 比较的结果值
-        int compare = 0;
-        // 要保存元素的父节点
+        // 要比较的节点的父节点,记录新添加节点的父节点
         Node<E> parent = root;
-        while(node != null) {
-            parent = node;
-            compare = this.compare(element,node.element);
-            if ( compare > 0) {
-                // 迭代的过程,变量不断朝着目标演变
-                node = node.right;
-            } else if ( compare < 0) {
+        while (node != null) {
+            compareResult = compare(node.element, element);
+            if (compareResult > 0) { // 取左子节点继续比较
+                // 记录父节点
+                parent = node;
                 node = node.left;
-            } else {
-                //如果传入的元素和原本节点中存储的元素相等,那么就用新传入的元素对象替换旧的元素对象
-                node.element = element;
+            } else if (compareResult < 0) { // 取右子节点继续比较
+                parent = node;
+                node = node.right;
+            } else { // 相等的情况
+                node.element = element; // 用新值替换旧值
                 return;
             }
         }
-        // 创建要保存的节点对象
-        Node<E> newNode = new Node<>(element,parent);
-        // 让其父节点指向新创建的节点
-        if (compare > 0) {
-            parent.right = newNode;
-        } else {
-            parent.left = newNode;
+        // 添加新的节点,让新添加节点的parent指向父节点
+        Node<E> addNode = new Node<>(element, parent);
+        if (compareResult > 0) { // 在父节点的左子节点添加新的元素节点
+            parent.left = addNode;
+        } else { // 在父节点的左子节点添加新的元素节点
+            parent.right = addNode;
         }
         size++;
     }
 
+    /**
+     * 比较两个元素的大小
+     *
+     * @param element1 元素1
+     * @param element2 元素2
+     * @return int
+     */
+    private int compare(E element1, E element2) {
+        if (comparator != null) {
+            // 传入了比较器,优先使用比较器
+            return comparator.compare(element1, element2);
+        }
+        // 如果没有传入比较器,那么元素一定要实现Comparable接口
+        return ((Comparable<E>) element1).compareTo(element2);
+    }
+
+
+    /**
+     * 对二叉树进行前序遍历, 先遍历父节点
+     */
+    public void preOrderTraversal() {
+        preOrderTraversal(root);
+    }
+
+    private void preOrderTraversal(Node<E> root) {
+        if (root == null) {
+            return;
+        }
+        System.out.println(root.element);
+        preOrderTraversal(root.left);
+        preOrderTraversal(root.right);
+    }
+
+    /**
+     * 对二叉树进行中序遍历, 先遍历左子节点,再遍历父节点
+     */
+    public void inorderTraversal() {
+        inorderTraversal(root);
+
+    }
+
+    private void inorderTraversal(Node<E> root) {
+        if (root == null) {
+            return;
+        }
+        inorderTraversal(root.left);
+        System.out.println(root.element);
+        inorderTraversal(root.right);
+    }
+
+    /**
+     * 对二叉树进行后序遍历, 先遍历左子节点,再遍历右子节点, 最后遍历父节点
+     */
+    public void postOrderTraversal() {
+        postOrderTraversal(root);
+    }
+
+    private void postOrderTraversal(Node<E> root) {
+        if (root == null) {
+            return;
+        }
+        postOrderTraversal(root.left);
+        postOrderTraversal(root.right);
+        System.out.println(root.element);
+    }
+
+    /**
+     * 对二叉树进行层序遍历
+     */
+    public void levelOrderTraversal() {
+        if (root == null) {
+            return;
+        }
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(root);
+        // 当父节点出队列,其子节点进队列
+        while (!queue.isEmpty()) {
+            Node<E> node = queue.poll();
+            System.out.println(node.element);
+            if (node.left != null) {
+                queue.offer(node.left);
+            }
+            if (node.right != null) {
+                queue.offer(node.right);
+            }
+        }
+    }
+
+    /**
+     * 删除元素
+     *
+     * @param element 元素
+     */
+    public void remove(E element) {
+
+    }
+
+    /**
+     * 找一个节点的前驱节点:中序遍历该节点的前一个节点
+     *
+     * @param node 节点对象
+     * @return 前驱节点
+     */
+    private Node<E> predecessor(Node<E> node) {
+        if (node == null) {
+            return null;
+        }
+        if (node.left != null) { // 如果该节点的左子树不为空
+            // 找到左子树中值最大的节点
+            node = node.left;
+            while (node.right != null) {
+                node = node.right;
+            }
+            return node;
+        } else {
+            // 找该节点的父节点中第一个右子树中包含该节点的父节点
+            while(node.parent != null && node.parent.left == node) {
+                node = node.parent;
+            }
+            // 跳出while循环有两种情况: 1, 父节点为null  2,父节点的右子节点为该节点
+            return node.parent;
+        }
+
+    }
+
+    private Node<E> successor(Node<E> node) {
+        if (node == null) {
+            return null;
+        }
+
+        if (node.right != null) { // 右子树不为空的情况
+            // 找出右子树中节点最小的值
+            node = node.right;
+            while (node.left != null) {
+                node = node.left;
+            }
+            return node;
+        } else { // 找出该节点父节点中第一个左子树包含该节点的父节点
+            while (node.parent != null && node.parent.right == node) {
+                node = node.parent;
+            }
+            return node.parent;
+        }
+    }
+
+    /**
+     * 判断是否包含元素
+     *
+     * @param element 元素
+     * @return boolean
+     */
     public boolean contains(E element) {
         return false;
     }
 
     /**
-     * 前序遍历: 先访问父节点, 然后是左子节点, 再是右子节点
-     */
-    public void preorderTraversal(Visitor<E> visitor) {
-        if (visitor == null) {
-            return;
-        }
-        // 前序遍历肯定从根节点root开始
-        preorderTraversal(root,visitor);
-    }
-
-    /**
-     * 采用递归的方式对二叉树进行前序遍历: 1,方法带形参 2,方法有出口 3,方法内部调用方法本身且形参朝着出口的方向变化
-     * @param node 节点
-     */
-    private void  preorderTraversal(Node<E> node,Visitor<E> visitor) {
-        //递归方法的出口:
-        if (node == null || visitor.stop) {
-            return;
-        }
-        // 前序遍历先遍历父节点
-        visitor.stop = visitor.visit(node.element);
-        // 再遍历左子节点
-        preorderTraversal(node.left,visitor);
-        // 再遍历右子节点
-        preorderTraversal(node.right,visitor);
-    }
-
-    /**
-     * 中序遍历: 先访问左子节点,然后访问父节点,最后是右子节点
-     * 注意: 中序遍历出的结果,要么全是升序排列, 要么全是降序排列
-     */
-    public void inorderTraversal(Visitor<E> visitor) {
-        if(visitor == null) {
-            return;
-        }
-        inorderTraversal(root,visitor);
-    }
-
-    /**
-     * 递归的方式实现二叉树的中序遍历
-     * @param node 节点
-     */
-    private void inorderTraversal(Node<E> node,Visitor<E> visitor) {
-       if (node == null || visitor.stop) {
-           return;
-       }
-       // 先遍历左子树
-       inorderTraversal(node.left,visitor);
-       if (visitor.stop) {
-           return;
-       }
-       // 再遍历父节点
-        visitor.stop = visitor.visit(node.element);
-        // 最后遍历右子树
-        inorderTraversal(node.right,visitor);
-    }
-
-    /**
-     * 后续遍历: 先是左子节点,然后是右子节点,最后是父节点
-     */
-    public void postorderTraversal(Visitor<E> visitor) {
-        if (visitor == null) {
-            return;
-        }
-        postorderTraversal(root,visitor);
-    }
-
-    /**
-     * 采用递归的方式实现后续遍历
-     * @param node 节点
-     */
-    private void postorderTraversal(Node<E> node,Visitor<E> visitor) {
-        if ( node == null || visitor.stop) {
-            return;
-        }
-        // 先遍历左子树
-        postorderTraversal(node.left,visitor);
-        // 然后遍历右子树
-        postorderTraversal(node.right,visitor);
-        if (visitor.stop) {
-            return;
-        }
-        // 最后遍历父节点
-        visitor.stop = visitor.visit(node.element);
-
-    }
-
-    /**
-     * 层序遍历: 二叉树从左到右,从上到下依次遍历
-     */
-    public void levelOrderTraversal(Visitor<E> visitor) {
-        levelOrderTraversal(root,visitor);
-    }
-
-    /**
-     * 采用迭代的方式对二叉树进行层序遍历
-     * @param node 节点
-     */
-    private void levelOrderTraversal(Node<E> node,Visitor<E> visitor) {
-        if(node == null || visitor == null) {
-            return;
-        }
-        // 使用队列来存储要被遍历的节点
-        Queue<Node<E>> queue = new LinkedList<>();
-        // 入队列
-        queue.offer(node);
-        // 出队列
-        while (queue.size() > 0) {
-            Node<E> poll = queue.poll();
-            if (visitor.visit(poll.element)) {
-                // 如果遍历的visit()方法返回true,表示不再继续遍历
-                return;
-            }
-            if (poll.left != null) {
-                queue.offer(poll.left);
-            }
-            if (poll.right != null) {
-                queue.offer(poll.right);
-            }
-        }
-    }
-
-    /**
-     * 二叉搜索树存储的元素必须是可以比较的,所以不能存储空元素
+     * 非空校验
      *
-     * @param element 要存储的元素
+     * @param element 元素
      */
-    private void notNullCheck(E element) {
+    private void checkNotNull(E element) {
         if (element == null) {
-            throw new IllegalArgumentException("element can not be null");
+            throw new IllegalArgumentException("二叉搜索树中存储的元素不能为空");
         }
     }
 
     /**
-     * 访问器接口: 对二叉搜素树遍历的节点元素进行处理
-     */
-    public static abstract class Visitor<E> {
-        /**
-         * 遍历结束的标识
-         */
-         private boolean stop;
-
-        /**
-         * 对节点元素进行处理的方法
-         * @param e 节点元素
-         * @return boolean 如果返回true表示遍历结束,不再往下遍历
-         */
-        abstract boolean visit(E e);
-    }
-
-    /**
-     * 二叉搜索树存储的元素必须是具有可比较性的,所以传入的元素类型要么实现了Comparable接口,要么传入Comparator比较器对象
-     * 二叉树中存储的元素必须实现Comparable接口,可以使用泛型来约束元素类型
-     * 而Comparator比较器则可以让元素类型灵活的实现比较方式
-     * @param element 要新增的元素
-     * @param target 已存储节点的元素
-     * @return int
-     */
-    private int compare(E element, E target) {
-        // 如果创建二叉搜索树时对成员变量比较器对象进行了初始化,优先使用比较器对象对传入的元素进行比较
-        if (comparator != null) {
-            return comparator.compare(element,target);
-        }
-        // 如果没有对比较器对象进行初始化,就必须让传入的元素类型实现Comparable接口
-        Comparable<E> comparable = (Comparable<E>)element;
-        return comparable.compareTo(target);
-    }
-
-    /**
-     * 查询给定节点的前驱节点, 前驱节点: 中序遍历(从小到大排序)时,该节点的前一个节点
-     * @param node
-     * @return
-     */
-    private Node<E> predecessor(Node<E> node) {
-        // 如果该节点有左子树,那么该节点的前驱节点是它的左子树中值最大的节点
-        if (node.left != null) {
-            Node<E> predecessor = node.left;
-            while(predecessor.right != null) {
-                predecessor = predecessor.right;
-            }
-            return predecessor;
-        }
-        // 如果该节点的左子树为空,那么该节点的前驱节点是它的父级节点中第一个向左的父级节点
-        while(node.parent != null && node.parent.left == node) {
-            node = node.parent;
-        }
-        // node.parent == null 或者 node.parent.right == node
-        return node.parent;
-    }
-
-    /**
-     * 查询一个节点的后继节点, 后继节点: 中序遍历二叉树时,该节点的后一个节点
-     * @param node
-     * @return
-     */
-    private Node<E> successor(Node<E> node) {
-        // 如果存在右子树,就查找右子树中最小的节点
-        if (node.right != null) {
-            Node<E> successor = node.right;
-            while(successor.left != null) {
-                successor = successor.left;
-            }
-            return successor;
-        }
-        // 如果存在父节点,就查找第一个是父节点右子节点的父节点
-        while(node.parent != null && node.parent.right == node) {
-            node = node.parent;
-        }
-        // node.parent == null 或者 node.parent.left = node
-        return node.parent;
-    }
-
-    /**
-     * 提供删除元素的接口
-     * @param element 元素
-     */
-    public void remove(E element) {
-        remove(node(element));
-    }
-
-    private void remove(Node<E> node) {
-
-    }
-
-    /**
-     * 获取二叉树中元素element对应的节点node
-     * @param element 元素
-     * @return Node<E>
-     */
-    private Node<E> node(E element) {
-        notNullCheck(element`);
-        Node<E> node = root;
-        while(node != null) {
-            int compare = compare(node.element, element);
-            if (compare > 0) {
-                node = node.left;
-            } else if (compare < 0) {
-                node = node.right;
-            } else {
-                break;
-            }
-        }
-        return node;
-    }
-
-    /**
-     * 实现BinaryTreeInfo接口是为了在控制台打印二叉搜索树
-     * @return 根节点
+     * who is the root node
      */
     @Override
     public Object root() {
         return this.root;
     }
 
+    /**
+     * how to get the left child of the node
+     *
+     * @param node
+     */
     @Override
     public Object left(Object node) {
-        return ((Node<E>)node).left;
+        return ((Node<E>) node).left;
     }
 
+    /**
+     * how to get the right child of the node
+     *
+     * @param node
+     */
     @Override
     public Object right(Object node) {
-        return ((Node<E>)node).right;
+        return ((Node<E>) node).right;
     }
 
+    /**
+     * how to print the node
+     *
+     * @param node
+     */
     @Override
     public Object string(Object node) {
-        return ((Node<E>)node).element;
+        return ((Node<E>) node).element;
     }
 }
-
-

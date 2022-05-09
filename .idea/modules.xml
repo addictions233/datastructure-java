@@ -10,9 +10,12 @@
       <module fileurl="file://$PROJECT_DIR$/05-队列/05-队列.iml" filepath="$PROJECT_DIR$/05-队列/05-队列.iml" />
       <module fileurl="file://$PROJECT_DIR$/06-二叉搜索树/06-二叉搜索树.iml" filepath="$PROJECT_DIR$/06-二叉搜索树/06-二叉搜索树.iml" />
       <module fileurl="file://$PROJECT_DIR$/07-AVL/07-AVL.iml" filepath="$PROJECT_DIR$/07-AVL/07-AVL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/08-集合/08-集合.iml" filepath="$PROJECT_DIR$/08-集合/08-集合.iml" />
+      <module fileurl="file://$PROJECT_DIR$/09-映射/09-映射.iml" filepath="$PROJECT_DIR$/09-映射/09-映射.iml" />
       <module fileurl="file://$PROJECT_DIR$/10-哈希表/10-哈希表.iml" filepath="$PROJECT_DIR$/10-哈希表/10-哈希表.iml" />
       <module fileurl="file://$PROJECT_DIR$/11-阻塞队列/11-阻塞队列.iml" filepath="$PROJECT_DIR$/11-阻塞队列/11-阻塞队列.iml" />
       <module fileurl="file://$PROJECT_DIR$/12-字符串算法题/12-字符串算法题.iml" filepath="$PROJECT_DIR$/12-字符串算法题/12-字符串算法题.iml" />
+      <module fileurl="file://$PROJECT_DIR$/20-排序/20-排序.iml" filepath="$PROJECT_DIR$/20-排序/20-排序.iml" />
     </modules>
   </component>
 </project>
