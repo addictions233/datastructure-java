@@ -2,7 +2,6 @@ package com.one;
 
 import java.util.LinkedList;
 import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**

@@ -1,9 +1,6 @@
 package com.Test;
 
-import com.blockqueue.BlockingQueue;
-
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * @ClassName: BlockQueueTest
