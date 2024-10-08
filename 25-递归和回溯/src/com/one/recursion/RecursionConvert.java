@@ -16,12 +16,15 @@ public class RecursionConvert {
      * @param n 递归参数
      */
     private static void log(int n) {
-        if (n < 1) { // 递归函数的边界
+        // 递归函数的边界
+        if (n < 1) {
             return;
         }
-        log(n - 1);  // 原函数和子函数的关系
+        log(n - 1);
+        // 原问题和子问题的关系
         int v = n + 10;
-        System.out.println(v);  // 递归函数的作用
+        // 递归函数的作用
+        System.out.println(v);
     }
 
     /**
