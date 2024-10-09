@@ -10,10 +10,10 @@ package com.one.recursion;
  */
 public class JumpStair {
     public static void main(String[] args) {
-
+        System.out.println(jumpStairs(3));
     }
 
-    public int jumpStairs(int n) {
+    public static int jumpStairs(int n) {
         if (n == 1) {
             return 1;
         } else if (n == 2) {

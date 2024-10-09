@@ -32,5 +32,7 @@ public class RecursionConvert {
      *
      * @param n 递归参数
      */
-    private static void stackFrame (int n) {}
+    private static void stackFrame (int n) {
+
+    }
 }
