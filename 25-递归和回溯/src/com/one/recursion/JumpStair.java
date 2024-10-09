@@ -13,6 +13,9 @@ public class JumpStair {
         System.out.println(jumpStairs(3));
     }
 
+    /**
+     * 递归写法
+     */
     public static int jumpStairs(int n) {
         if (n == 1) {
             return 1;
@@ -22,5 +25,19 @@ public class JumpStair {
             return jumpStairs(n-2) + jumpStairs(n-1);
         }
 
+    }
+
+    /**
+     * 迭代写法
+     */
+    public static int jumpStairs1(int n) {
+        int numb1 = 1;
+        int numb2 = 2;
+        int result = numb1;
+        for (int i = 3; i <= n; i++) {
+            result = numb1 + numb2;
+            numb1 = numb2;
+        }
+        return result;
     }
 }
