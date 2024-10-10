@@ -10,7 +10,8 @@ package com.one.recursion;
  */
 public class JumpStair {
     public static void main(String[] args) {
-        System.out.println(jumpStairs(3));
+        System.out.println(jumpStairs(12));
+        System.out.println(jumpStairs1(12));
     }
 
     /**
@@ -31,13 +32,18 @@ public class JumpStair {
      * 迭代写法
      */
     public static int jumpStairs1(int n) {
-        int numb1 = 1;
-        int numb2 = 2;
-        int result = numb1;
-        for (int i = 3; i <= n; i++) {
-            result = numb1 + numb2;
-            numb1 = numb2;
+        if (n == 1) {
+            return 1;
         }
-        return result;
+        if (n == 2) {
+            return 2;
+        }
+        int first = 1;
+        int second = 2;
+        for (int i = 3; i <= n; i++) {
+            second = first + second;
+            first = second - first;
+        }
+        return second;
     }
 }
