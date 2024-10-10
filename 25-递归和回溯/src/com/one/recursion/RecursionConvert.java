@@ -1,5 +1,7 @@
 package com.one.recursion;
 
+import java.util.Stack;
+
 /**
  * @author one
  * @description 递归百分之百可以转回为非递归
@@ -8,6 +10,9 @@ package com.one.recursion;
 public class RecursionConvert {
     public static void main(String[] args) {
         log(4);
+        System.out.println("-------------------");
+        stackFrame(4);
+
     }
 
     /**
@@ -33,6 +38,24 @@ public class RecursionConvert {
      * @param n 递归参数
      */
     private static void stackFrame (int n) {
+        // 自己维护一个栈的数据结构, 保存每次调用的参数和局部变量
+        Stack<Frame> stack = new Stack<>();
+        while (n > 0) {
+            stack.push(new Frame(n, n + 10));
+            n--;
+        }
+        while (!stack.isEmpty()) {
+            Frame frame = stack.pop();
+            System.out.println(frame.v);
+        }
+    }
 
+    static class Frame {
+        int n;
+        int v;
+        Frame(int n, int v) {
+            this.n = n;
+            this.v = v;
+        }
     }
 }
