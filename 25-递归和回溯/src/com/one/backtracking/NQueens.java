@@ -33,6 +33,7 @@ public class NQueens {
             if (isValid(row, col)) {
                 // 摆放皇后
                 columns[row] = col;
+                // 递归调用
                 place(row + 1);
             } else {
                 // 减枝, 啥都不干就是剪枝
@@ -48,7 +49,16 @@ public class NQueens {
      * @return boolean
      */
     private boolean isValid(int row, int col) {
-        return false;
+        for (int i = 0; i < row; i++) {
+            if (columns[i] == col) {
+                return false;
+            }
+
+            if ( row - i == Math.abs(col - columns[i])) {
+                return false;
+            }
+        }
+        return true;
     }
 
 
