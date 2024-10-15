@@ -20,6 +20,7 @@
       <module fileurl="file://$PROJECT_DIR$/15-字符串算法题/15-字符串算法题.iml" filepath="$PROJECT_DIR$/15-字符串算法题/15-字符串算法题.iml" />
       <module fileurl="file://$PROJECT_DIR$/20-排序/20-排序.iml" filepath="$PROJECT_DIR$/20-排序/20-排序.iml" />
       <module fileurl="file://$PROJECT_DIR$/25-递归和回溯/25-递归和回溯.iml" filepath="$PROJECT_DIR$/25-递归和回溯/25-递归和回溯.iml" />
+      <module fileurl="file://$PROJECT_DIR$/greedy-divideandconquer/greedy-divideandconquer.iml" filepath="$PROJECT_DIR$/greedy-divideandconquer/greedy-divideandconquer.iml" />
     </modules>
   </component>
 </project>
