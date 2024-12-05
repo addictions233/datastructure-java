@@ -18,4 +18,8 @@ public class CoinChange {
         int min2 = Math.min(coins(n - 5),  coins(n - 1));
         return Math.min(min1, min2) + 1;
     }
+
+    public int coinChange(int[] coins, int amount) {
+        return 0;
+    }
 }

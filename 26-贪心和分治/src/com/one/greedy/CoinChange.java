@@ -30,7 +30,7 @@ public class CoinChange {
             money -= faces[i];
             coins++;
             System.out.println(faces[i]);
-            i = faces.length;
+            i++;
         }
 
         System.out.println("一共选了" + coins + "枚硬币");
