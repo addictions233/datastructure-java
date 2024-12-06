@@ -7,6 +7,30 @@ package com.one.divideandconquer;
  */
 public class MaxSubArray {
 
+    public int maxSubArray2(int[] nums, int left, int right) {
+        if (right - left <= 1) {
+            return nums[left];
+        }
+        int middle = (left + right) >> 1;
+        int lMax = maxSubArray2(nums, left, middle);
+        int rMax = maxSubArray2(nums, middle, right);
+        int mLeftMax = Integer.MIN_VALUE;
+        int sum1 = 0;
+        for (int i = middle - 1; i >= left; i--) {
+            sum1 += nums[i];
+            mLeftMax = Math.max(mLeftMax, sum1);
+        }
+
+        int mRightMax = Integer.MIN_VALUE;
+        int sum2 = 0;
+        for (int i = middle; i < right; i++) {
+            sum2 += nums[i];
+            mRightMax = Math.max(mRightMax, sum2);
+        }
+
+        return Math.max(Math.max(lMax, rMax), mLeftMax + mRightMax);
+    }
+
     public int maxSubArray(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
