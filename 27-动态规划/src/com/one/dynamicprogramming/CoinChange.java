@@ -1,4 +1,4 @@
-package com.one.dynamicprogramming.coins;
+package com.one.dynamicprogramming;
 
 /**
  * @author one
