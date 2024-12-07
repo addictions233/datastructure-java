@@ -19,10 +19,10 @@
       <module fileurl="file://$PROJECT_DIR$/14-Trie/14-Trie.iml" filepath="$PROJECT_DIR$/14-Trie/14-Trie.iml" />
       <module fileurl="file://$PROJECT_DIR$/15-字符串算法题/15-字符串算法题.iml" filepath="$PROJECT_DIR$/15-字符串算法题/15-字符串算法题.iml" />
       <module fileurl="file://$PROJECT_DIR$/20-排序/20-排序.iml" filepath="$PROJECT_DIR$/20-排序/20-排序.iml" />
+      <module fileurl="file://$PROJECT_DIR$/24-滑动窗口和双指针/24-滑动窗口和双指针.iml" filepath="$PROJECT_DIR$/24-滑动窗口和双指针/24-滑动窗口和双指针.iml" />
       <module fileurl="file://$PROJECT_DIR$/25-递归和回溯/25-递归和回溯.iml" filepath="$PROJECT_DIR$/25-递归和回溯/25-递归和回溯.iml" />
       <module fileurl="file://$PROJECT_DIR$/26-贪心和分治/26-贪心和分治.iml" filepath="$PROJECT_DIR$/26-贪心和分治/26-贪心和分治.iml" />
       <module fileurl="file://$PROJECT_DIR$/27-动态规划/27-动态规划.iml" filepath="$PROJECT_DIR$/27-动态规划/27-动态规划.iml" />
-      <module fileurl="file://$PROJECT_DIR$/huadong/huadong.iml" filepath="$PROJECT_DIR$/huadong/huadong.iml" />
     </modules>
   </component>
 </project>
