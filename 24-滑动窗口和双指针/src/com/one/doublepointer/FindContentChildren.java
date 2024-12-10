@@ -1,6 +1,7 @@
 package com.one.doublepointer;
 
 import java.util.Arrays;
+import java.util.StringJoiner;
 
 /**
  * @description: 455. 分发饼干
@@ -29,5 +30,22 @@ public class FindContentChildren {
             }
         }
         return result;
+    }
+
+    public static String reverseWords(String s) {
+//        s = s.trim();
+        String[] split = s.split("\\s");
+        StringBuilder sb = new StringBuilder();
+        for (int i = split.length - 1; i >= 0; i--) {
+            if ("".equals(split[i])) {
+                continue;
+            }
+            sb.append(split[i]).append(" ");
+        }
+        return sb.substring(0, sb.length());
+    }
+
+    public static void main(String[] args) {
+        String str = reverseWords("  hello world  ");
     }
 }
