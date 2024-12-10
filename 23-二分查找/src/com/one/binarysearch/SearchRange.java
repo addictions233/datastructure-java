@@ -16,6 +16,9 @@ public class SearchRange {
         return binarySearch(nums, 0, nums.length, target);
     }
 
+    /**
+     * 这里利用了分治的思想
+     */
     public int[] binarySearch(int[] nums, int start, int end, int target) {
         if (end - start < 1) {
             return new int[]{-1,-1};
