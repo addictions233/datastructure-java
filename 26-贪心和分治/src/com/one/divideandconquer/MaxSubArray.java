@@ -35,7 +35,7 @@ public class MaxSubArray {
         if (nums == null || nums.length == 0) {
             return 0;
         }
-        return maxSubArray(nums, 0,  nums.length);
+        return maxSubArray(nums, 0, nums.length);
     }
 
     public int maxSubArray(int[] nums, int left, int right) {
