@@ -30,4 +30,22 @@ public class BinarySearch {
     public static void main(String[] args) {
         System.out.println(binarySearch(new int[]{1,3,5,7,9},0, 5,4));
     }
+
+    public int search(int[] nums, int target) {
+        return binarySearch2(nums, 0, nums.length - 1, target);
+    }
+
+    public int binarySearch2(int[] nums, int start, int end, int target) {
+        if (end < start) {
+            return -1;
+        }
+        int mid = (start + end) >>> 1;
+        if (nums[mid] == target) {
+            return mid;
+        } else if (nums[mid] < target) {
+           return   binarySearch2(nums, mid + 1, end, target);
+        } else {
+           return binarySearch2(nums, start, mid -1, target);
+        }
+     }
 }
