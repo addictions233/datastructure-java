@@ -2,7 +2,6 @@ package com.mj.linkedlist;
 
 import com.mj.list.List;
 
-import jdk.nashorn.api.tree.ForInLoopTree;
 
 public class LinkedList2<E> implements List<E> {
 	private int size;
