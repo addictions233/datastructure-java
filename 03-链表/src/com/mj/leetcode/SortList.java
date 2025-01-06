@@ -1,6 +1,5 @@
 package com.mj.leetcode;
 
-import com.mj.ListNode;
 import org.junit.Test;
 
 /**

@@ -1,4 +1,4 @@
-package com.mj;
+package com.mj.leetcode;
 
 /**
  * @description: leetcode中的链表类
