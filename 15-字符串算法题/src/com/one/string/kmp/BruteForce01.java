@@ -1,4 +1,4 @@
-package com.one.string;
+package com.one.string.kmp;
 
 /**
  * @author one

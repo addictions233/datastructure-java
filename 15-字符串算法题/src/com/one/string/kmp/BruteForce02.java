@@ -1,4 +1,4 @@
-package com.one.string;
+package com.one.string.kmp;
 
 /**
  * @author one
@@ -6,6 +6,12 @@ package com.one.string;
  * @date 2025-1-6
  */
 public class BruteForce02 {
+
+    public static void main(String[] args) {
+        String text = "abcdefghijklmnopqrstuvwxyz";
+        String pattern = "defqweq";
+        System.out.println(indexOf(text, pattern));
+    }
 
 
     public static int indexOf(String text, String pattern) {
