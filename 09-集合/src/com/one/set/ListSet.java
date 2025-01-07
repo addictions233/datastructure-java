@@ -12,7 +12,12 @@ import java.util.List;
 public class ListSet<E> implements Set<E> {
     private final int ELEMENT_NOT_FUND = -1;
 
-    List<E> list = new LinkedList<E>();
+    /**
+     * 使用链表实现Set集合, 需要持有一个LinkedList
+     * 最终集合元素都是存储在链表中
+     */
+    private List<E> list = new LinkedList<E>();
+
 
     /**
      * 获取集合元素个数
@@ -60,10 +65,12 @@ public class ListSet<E> implements Set<E> {
      */
     @Override
     public void add(E element) {
+        // 查询是否存在重复元素, 进行去重
         int index = list.indexOf(element);
         if(index == ELEMENT_NOT_FUND) {
             list.add(element);
         } else {
+            // 使用新元素覆盖旧元素
             list.set(index, element);
         }
     }
@@ -75,7 +82,10 @@ public class ListSet<E> implements Set<E> {
      */
     @Override
     public void remove(E element) {
-        list.remove(element);
+        int index = list.indexOf(element);
+        if (index != ELEMENT_NOT_FUND) {
+            list.remove(element);
+        }
     }
 
     /**
