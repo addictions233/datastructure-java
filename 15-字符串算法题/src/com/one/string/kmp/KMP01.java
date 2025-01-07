@@ -8,8 +8,8 @@ package com.one.string.kmp;
 public class KMP01 {
 
     public static void main(String[] args) {
-        String text = "abcdefghijklmnodefdefpqrstuvwxyz";
-        String pattern = "defdef";
+        String text = "aabaaabaaac";
+        String pattern = "aabaaac";
         System.out.println(indexOf(text, pattern));
     }
 
