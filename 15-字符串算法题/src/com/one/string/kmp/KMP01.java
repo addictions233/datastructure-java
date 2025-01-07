@@ -7,13 +7,19 @@ package com.one.string.kmp;
  */
 public class KMP01 {
 
+    public static void main(String[] args) {
+        String text = "abcdefghijklmnodefdefpqrstuvwxyz";
+        String pattern = "defdef";
+        System.out.println(indexOf(text, pattern));
+    }
+
     public static int indexOf(String text, String pattern) {
         char[] textChars = text.toCharArray();
         char[] patternChars = pattern.toCharArray();
         int textLen = textChars.length;
         int patternLen = patternChars.length;
 
-        int[] next = next(patternChars);
+        int[] next = next(pattern);
         int pi = 0;
         int ti = 0;
         while(pi < patternLen && ti - pi < textLen - patternLen) {
@@ -28,14 +34,17 @@ public class KMP01 {
         return pi == patternLen ? ti - pi : -1;
     }
 
-    private static int[] next(char[] patternChars) {
-        int[] next = new int[patternChars.length];
-        next[0] = -1;
+    private static int[] next(String pattern) {
+        int length = pattern.length();
+        int[] next = new int[length];
         int i = 0;
-        int j = -1;
-        while (i < patternChars.length - 1) {
-            if (j == -1 || patternChars[i] == patternChars[j]) {
-                i++;
+        int n = next[i] = - 1;
+        int imax = length - 1;
+        while (i < imax) {
+            if (n < 0 || pattern.charAt(i) == pattern.charAt(n)) {
+                next[++i] = ++n;
+            } else {
+                n = next[n];
             }
         }
         return next;
