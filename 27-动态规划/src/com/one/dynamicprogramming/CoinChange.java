@@ -1,7 +1,5 @@
 package com.one.dynamicprogramming;
 
-import java.util.concurrent.CompletionService;
-
 /**
  * @author one
  * @description Leetcode 322 零钱兑换
@@ -95,6 +93,20 @@ public class CoinChange {
         return dp[n];
     }
 
+
+    public int getCoin(int[] coins, int n) {
+        int[] dp = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            int min = Integer.MAX_VALUE;
+            for (int coin : coins) {
+                if (i>= coin) {
+                    min = Math.min(dp[i - coin], min);
+                }
+            }
+            dp[i] = min + 1;
+        }
+        return dp[n];
+    }
 
 
 
