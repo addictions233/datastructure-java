@@ -19,7 +19,7 @@ public class StrMatch {
         int ti = 0, pi = 0;
         int[] next = next(patternChars);
         int tmax = textChars.length - patternChars.length;
-        while (pi < patternChars.length && ti - pi < tmax) {
+        while (pi < patternChars.length && ti - pi <= tmax) {
             if (pi < 0 || patternChars[pi] == textChars[ti]) {
                 pi++;
                 ti++;
@@ -32,16 +32,14 @@ public class StrMatch {
 
     private int[] next(char[] patternChars) {
         int[] next = new int[patternChars.length];
-        next[0] = -1;
-        if (patternChars.length == 1) {
-            return next;
-        }
-        next[1] = 0;
-        for (int i = 2; i < patternChars.length; i++) {
-            if (patternChars[i - 1] == patternChars[next[i -1]]) {
-                next[i] = next[i -1] + 1;
+        int i = 0;
+        int n = next[i] = -1;
+        int imax = patternChars.length -1;
+        while(i < imax) {
+            if (n < 0 || patternChars[i] == patternChars[n]) {
+                next[++i] = ++n;
             } else {
-                next[i] = 0;
+                n = next[n];
             }
         }
         return next;

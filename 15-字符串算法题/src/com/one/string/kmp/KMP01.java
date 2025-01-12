@@ -22,7 +22,7 @@ public class KMP01 {
         int[] next = next(pattern);
         int pi = 0;
         int ti = 0;
-        while(pi < patternLen && ti - pi < textLen - patternLen) {
+        while(pi < patternLen && ti - pi <= textLen - patternLen) {
             if (pi < 0 || textChars[ti] == patternChars[pi]) {
                 ti++;
                 pi++;  // 当0号位不匹配时, pi的值会是-1, 所以需要判断pi < 0, pi++还是0
