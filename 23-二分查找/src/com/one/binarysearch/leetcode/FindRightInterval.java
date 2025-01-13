@@ -2,6 +2,7 @@ package com.one.binarysearch.leetcode;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -21,6 +22,7 @@ public class FindRightInterval {
             indexMap.put(intervals[i][0], i);
         }
         int[] result = new int[intervals.length];
+        Arrays.fill(result, -1);
         for (int i = 0; i < intervals.length; i++) {
             for (Map.Entry<Integer, Integer> entry : indexMap.entrySet()) {
                 if (entry.getKey() >= intervals[i][1]) {
@@ -28,7 +30,6 @@ public class FindRightInterval {
                     break;
                 }
             }
-            result[i] = -1;
         }
         return result;
     }
