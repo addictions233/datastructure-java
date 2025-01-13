@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 /**
@@ -24,11 +25,11 @@ public class FindRightInterval {
         int[] result = new int[intervals.length];
         Arrays.fill(result, -1);
         for (int i = 0; i < intervals.length; i++) {
-            for (Map.Entry<Integer, Integer> entry : indexMap.entrySet()) {
-                if (entry.getKey() >= intervals[i][1]) {
-                    result[i] = entry.getValue();
-                    break;
-                }
+            Map.Entry<Integer, Integer> entry = indexMap.ceilingEntry(intervals[i][1]);
+            if (Objects.nonNull(entry)) {
+                result[i] = entry.getValue();
+            } else {
+                result[i] = -1;
             }
         }
         return result;
@@ -39,5 +40,20 @@ public class FindRightInterval {
         int[][] intervals = new int[][]{{3,4},{2,3},{1,2}};
         int[] rightInterval = findRightInterval(intervals);
         System.out.println(rightInterval);
+    }
+
+    public static void main(String[] args) {
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        map.put(1,1);
+        map.put(3,3);
+        map.put(5,5);
+        Map.Entry<Integer, Integer> lower = map.lowerEntry(3);
+        Map.Entry<Integer, Integer> floor = map.floorEntry(3);
+        System.out.println(lower.getKey());
+        System.out.println(floor.getKey());
+        Map.Entry<Integer, Integer> ceil = map.ceilingEntry(10);
+        Map.Entry<Integer, Integer> higher = map.higherEntry(10);
+        System.out.println(ceil.getKey());
+        System.out.println(higher.getKey());
     }
 }
