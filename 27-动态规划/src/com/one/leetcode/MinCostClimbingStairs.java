@@ -16,11 +16,23 @@ public class MinCostClimbingStairs {
         // 方法一: 暴力递归
 //        return solution1(cost, cost.length);
 
-        int[] result = new int[cost.length + 1];
-        for (int i = 2; i < result.length; i++) {
-            result[i] = -1;
+        // 方法二: 记忆化搜索
+//        int[] result = new int[cost.length + 1];
+//        for (int i = 2; i < result.length; i++) {
+//            result[i] = -1;
+//        }
+//        return solution2(cost, cost.length, result);
+
+        // 方法三: 使用动态规划
+        // 1.定义dp[i]数组: 就是原问题和子问题的解
+        int[] dp = new int[cost.length + 1];
+        // 2.定义dp[0]:设置初始化状态
+        dp[0] = dp[1] = 0;
+        for (int i = 2; i < dp.length; i++) {
+            //3.定义状态转移方程: 确定dp[i]和dp[i-1]的关系
+            dp[i] = Math.min(dp[i-1] + cost[i-1], dp[i-2] + cost[i-2]);
         }
-        return solution2(cost, cost.length, result);
+        return dp[cost.length];
     }
 
     /**
