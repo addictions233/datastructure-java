@@ -124,11 +124,11 @@ public class BinarySearchTree<E> implements BinaryTreeInfo { // 实现BinaryTree
         Node<E> parent = root;
         // 定义二叉搜索树的两个元素的比较值
         int comp = 0;
-        /**
-         * 	重点: 常规添加元素, 二叉搜索树能够实现元素添加的功能是基于该树中存储的元素能够比较大小,
-         *  自己定义一个 compareTo(E element1,E element2)方法来比较两个元素大小
-         */
+
+        //  重点: 常规添加元素, 二叉搜索树能够实现元素添加的功能是基于该树中存储的元素能够比较大小,
+        //  自己定义一个 compareTo(E element1,E element2)方法来比较两个元素大小
         while (node != null) {
+            parent = node;
             comp = compare(element, node.element);
             if (comp > 0) {
                 node = node.right;
