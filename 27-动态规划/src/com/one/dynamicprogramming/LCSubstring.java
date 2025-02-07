@@ -2,7 +2,7 @@ package com.one.dynamicprogramming;
 
 /**
  * @author one
- * @description 最长公共子串
+ * @description 最长公共子串的长度
  * @date 2025-2-7
  */
 public class LCSubstring {
