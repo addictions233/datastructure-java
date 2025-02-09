@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * @ClassName: BubbleSort
- * @Description: 冒泡排序
+ * @Description: 冒泡排序：时间复杂度 O(n^2), 空间复杂度O(1)
  * @Author: one
  * @Date: 2022/05/05
  */

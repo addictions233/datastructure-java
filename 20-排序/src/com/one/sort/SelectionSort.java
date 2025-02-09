@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 /**
  * @author one
- * @description 选择排序
+ * @description 选择排序: 时间复杂度 O(n^2), 空间复杂度O(1)
  * @date 2022-8-10
  */
 public class SelectionSort {
