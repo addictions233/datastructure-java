@@ -27,7 +27,8 @@ public class SelectionSort {
     public static Integer[] selectSort(Integer[] source) {
         // 总共要遍历length-1轮
         for (int length = source.length - 1; length > 0; length--) {
-            int maxIndex = 0; // 记录最大的索引位置
+            // 记录最大的索引位置
+            int maxIndex = 0;
             for (int i = 1; i <= length; i++) {
                 if (source[maxIndex] < source[i]) {
                     maxIndex = i;
