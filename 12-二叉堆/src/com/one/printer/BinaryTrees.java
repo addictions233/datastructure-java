@@ -1,8 +1,5 @@
 package com.one.printer;
 
-import com.mj.printer.BinaryTreeInfo;
-import com.mj.printer.InorderPrinter;
-import com.mj.printer.LevelOrderPrinter;
 
 /**
  * 

@@ -1,6 +1,5 @@
 package com.one.printer;
 
-import com.mj.printer.BinaryTreeInfo;
 
 public abstract class Printer {
 	/**
