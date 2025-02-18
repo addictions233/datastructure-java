@@ -1,44 +1,31 @@
 package com.one.sort;
 
-import com.one.tools.Integers;
+public class SelectionSort<T extends Comparable<T>> extends Sort<T> {
 
-import java.util.Arrays;
+	@Override
+	protected void sort() {
+		
+//		for (int end = array.length - 1; end > 0; end--) {
+//			int max = 0;
+//			for (int begin = 1; begin <= end; begin++) {
+//				if (cmp(max, begin) <= 0) {
+//					max = begin;
+//				}
+//			}
+//			swap(max, end);
+//		}
+		
+		for (int end = array.length - 1; end > 0; end--) {
+			int max = 0;
+			for (int begin = 1; begin <= end; begin++) {
+				if (cmp(max, begin) < 0) {
+					max = begin;
+				}
+			}
+			swap(max, end);
+		}
+		
+		// 7 5 10 1 4 2 10 
+	}
 
-/**
- * @author one
- * @description 选择排序: 时间复杂度 O(n^2), 空间复杂度O(1)
- * @date 2022-8-10
- */
-public class SelectionSort {
-
-    public static void main(String[] args) {
-        Integer[] random = Integers.random(10, 1, 10);
-        System.out.println(Arrays.toString(random));
-        Integer[] target = selectSort(random);
-        System.out.println(Arrays.toString(target));
-    }
-
-    /**
-     * 遍历一轮,找到这一轮最大的元素,然后放在队列最后
-     *
-     * @param source
-     * @return
-     */
-    public static Integer[] selectSort(Integer[] source) {
-        // 总共要遍历length-1轮
-        for (int length = source.length - 1; length > 0; length--) {
-            // 记录最大的索引位置
-            int maxIndex = 0;
-            for (int i = 1; i <= length; i++) {
-                if (source[maxIndex] < source[i]) {
-                    maxIndex = i;
-                }
-            }
-            // 将最大值和末尾元素交换位置
-            int temp = source[maxIndex];
-            source[maxIndex] = source[length];
-            source[length] = temp;
-        }
-        return source;
-    }
 }
