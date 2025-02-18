@@ -6,6 +6,11 @@ import com.one.printer.BinaryTrees;
 import java.util.Comparator;
 
 public class Main {
+
+
+	public static void main(String[] args) {
+		test4();
+	}
 	
 	static void test1() {
 		BinaryHeap<Integer> heap = new BinaryHeap<>();
@@ -69,8 +74,5 @@ public class Main {
 		BinaryTrees.println(heap);
 	}
 
-	public static void main(String[] args) {
-		test4();
-	}
 
 }
