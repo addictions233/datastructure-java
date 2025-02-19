@@ -1,5 +1,10 @@
 package com.one.sort;
 
+/**
+ * 选择排序
+ * @author one
+ * @param <T>
+ */
 public class SelectionSort<T extends Comparable<T>> extends Sort<T> {
 
 	@Override

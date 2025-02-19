@@ -1,5 +1,10 @@
 package com.one.sort;
 
+/**
+ * 使用二分查找优化插入排序
+ * @author one
+ * @param <T>
+ */
 public class InsertionSort3<T extends Comparable<T>> extends Sort<T> {
 
 	

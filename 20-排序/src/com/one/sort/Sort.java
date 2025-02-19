@@ -2,7 +2,10 @@ package com.one.sort;
 
 import java.text.DecimalFormat;
 
-
+/**
+ * 排序抽象类
+ * @param <T>
+ */
 @SuppressWarnings("unchecked")
 public abstract class Sort<T extends Comparable<T>> implements Comparable<Sort<T>> {
 	protected T[] array;

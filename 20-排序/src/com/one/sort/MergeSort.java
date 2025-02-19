@@ -1,5 +1,10 @@
 package com.one.sort;
 
+/**
+ * 归并排序
+ * @author one
+ * @param <T>
+ */
 @SuppressWarnings("unchecked")
 public class MergeSort<T extends Comparable<T>> extends Sort<T> {
 	private T[] leftArray;

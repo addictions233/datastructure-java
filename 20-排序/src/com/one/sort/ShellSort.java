@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 希尔排序
+ * @author one
+ * @param <T>
+ */
 @SuppressWarnings("unused")
 public class ShellSort<T extends Comparable<T>> extends Sort<T> {
 

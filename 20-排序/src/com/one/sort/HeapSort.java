@@ -1,5 +1,10 @@
 package com.one.sort;
 
+/**
+ * 堆排序
+ * @author one
+ * @param <T>
+ */
 public class HeapSort<T extends Comparable<T>> extends Sort<T> {
 	private int heapSize;
 

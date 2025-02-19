@@ -1,5 +1,10 @@
 package com.one.sort;
 
+/**
+ * 插入排序优化
+ * @author one
+ * @param <T>
+ */
 public class InsertionSort2<T extends Comparable<T>> extends Sort<T> {
 
 	@Override
