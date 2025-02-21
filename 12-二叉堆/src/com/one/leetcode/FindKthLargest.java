@@ -1,5 +1,6 @@
 package com.one.leetcode;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
@@ -14,8 +15,45 @@ public class FindKthLargest {
     /**
      * top k问题: 维护一个size=k的小堆, 如果新遍历到的元素比堆顶元素大,则加入堆, 然后下虑
      */
-    public int findKthLargest(int[] nums, int k) {
-//        PriorityQueue<Integer>
-        return 0;
+    public static int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(k);
+        // 建堆
+        for (int i = 0; i < k; i++) {
+            priorityQueue.add(nums[i]);
+        }
+        for (int i = k; i < nums.length; i++) {
+            Integer peek = priorityQueue.peek();
+            if (peek < nums[i]) {
+                priorityQueue.poll();
+                priorityQueue.offer(nums[i]);
+            }
+        }
+        return priorityQueue.peek();
+    }
+
+    /**
+     * JDK中提供的PriorityQueue默认是小堆minHeap, 如果我们想建大堆, 使用 Comparator.reverseOrder()
+     */
+    public void maxHeap(){
+        // 创建一个最大堆的PriorityQueue
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+
+        // 添加元素到最大堆
+        maxHeap.add(5);
+        maxHeap.add(3);
+        maxHeap.add(8);
+        maxHeap.add(1);
+
+        // 遍历并打印最大堆中的元素
+        while (!maxHeap.isEmpty()) {
+            // 移除并返回队列头部的元素（最大的）
+            System.out.println(maxHeap.poll());
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] nums = new int[]{10,2,5,6,8,0,3};
+        int result = findKthLargest(nums, 2);
+        System.out.println(result);
     }
 }
