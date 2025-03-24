@@ -1,5 +1,9 @@
 package com.one.sort;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 /**
  * 堆排序
  * @author one
@@ -48,5 +52,20 @@ public class HeapSort<T extends Comparable<T>> extends Sort<T> {
 			index = childIndex;
 		}
 		array[index] = element;
+	}
+
+	public static void main(String[] args) {
+		int[] array = new int[]{10,9,6,30,5,11};
+
+		PriorityQueue<Integer> queue = new PriorityQueue<>(Comparator.reverseOrder());
+		for (int i : array) {
+			queue.offer(i);
+		}
+		int index = array.length;
+		while (!queue.isEmpty()) {
+			array[--index] = queue.poll();
+		}
+
+		System.out.println(Arrays.toString(array));
 	}
 }

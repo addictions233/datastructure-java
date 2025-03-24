@@ -1,9 +1,5 @@
 package com.one.test;
 
-import com.one.sort.BubbleSort;
-import com.one.tools.Integers;
-import com.one.tools.Times;
-
 /**
  * @ClassName: Main
  * @Description: 测试类
@@ -12,10 +8,23 @@ import com.one.tools.Times;
  */
 public class Main {
     public static void main(String[] args) {
-        Integer[] random = Integers.random(1000, 1, 1000);
-        Integers.println(random);
-        Times.test("冒泡排序",() -> {
-            Integer[] sort = BubbleSort.sort(random);
-        });
+        String str = "92988";
+
+        char[] chars = str.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            char max = chars[i];
+            int index = -1;
+            for (int j = i+1; j < chars.length; j++) {
+                if (chars[j] >= max) {
+                    max = chars[j];
+                    index = j;
+                }
+            }
+            if (index != -1) {
+                chars[index] = chars[i];
+                chars[i] = max;
+                System.out.println(new String(chars));
+            }
+        }
     }
 }
