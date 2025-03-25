@@ -17,10 +17,21 @@ public class IsIsomorphic {
         if (s.length() != t.length()) {
             return false;
         }
-//        HashMap<Character, Character>
-        for (int i = 0; i < s.toCharArray().length; i++) {
-
+        HashMap<Character, Integer> map = new HashMap<>();
+        HashMap<Character, Integer> map2 = new HashMap<>();
+        char[] source = s.toCharArray();
+        char[] target = t.toCharArray();
+        for (int i = 0; i < source.length; i++) {
+            int value = target[i] - source[i];
+            if (map.getOrDefault(source[i], value) != value) {
+                return false;
+            }
+            if (map2.getOrDefault(target[i], value) != value) {
+                return false;
+            }
+            map.put(source[i], value);
+            map2.put(target[i], value);
         }
-        return false;
+        return true;
     }
 }
